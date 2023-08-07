@@ -7,36 +7,49 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    adam-neovim.url = "github:abuggia/neovim-flake";
+    adam-neovim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nix-darwin, ... }: {
-    darwinConfigurations.adam-m2 = nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
+  outputs = inputs@{ nixpkgs, home-manager, nix-darwin, adam-neovim, ... }:
+    let
+      pkgs = import nixpkgs { overlays = [ adam-neovim.overlay ]; };
+    in
+    {
+      darwinConfigurations.adam-m2 = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
 
-        #./configuration.nix
-        ({ pkgs, ... }: {
+          ({ pkgs, ... }: {
 
-          # Auto upgrade nix package and the daemon service.
-          services.nix-daemon.enable = true;
-          nix.settings.experimental-features = "nix-command flakes";
+            # Auto upgrade nix package and the daemon service.
+            services.nix-daemon.enable = true;
+            nix.settings.experimental-features = "nix-command flakes";
 
-          # Create /etc/zshrc that loads the nix-darwin environment.
-          programs.zsh.enable = true;
-          environment.shells = [ pkgs.bashInteractive pkgs.zsh ];
-          environment.loginShell = pkgs.zsh;
+            # Create /etc/zshrc that loads the nix-darwin environment.
+            programs.zsh.enable = true;
+            environment.shells = [ pkgs.bashInteractive pkgs.zsh ];
+            environment.loginShell = pkgs.zsh;
 
-          #?? Set Git commit hash for darwin-version.
-          #system.configurationRevision = self.rev or self.dirtyRev or null;
-          # Used for backwards compatibility, please read the changelog before changing.
-          # $ darwin-rebuild changelog
-          system.stateVersion = 4;
-        })
+            #?? Set Git commit hash for darwin-version.
+            #system.configurationRevision = self.rev or self.dirtyRev or null;
+            # Used for backwards compatibility, please read the changelog before changing.
+            # $ darwin-rebuild changelog
+            system.stateVersion = 4;
+          })
 
-        home-manager.darwinModules.home-manager
+          home-manager.darwinModules.home-manager {
+            # home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            nixpkgs = pkgs;
 
-        ./hosts/adam-m2.mix
-      ];
+
+            # Fixes error about home dir being /var/empty
+            # See https://github.com/nix-community/home-manager/issues/4026
+            users.users.adam.home = "/Users/adam"; 
+            home-manager.users.adam = import ./hosts/adam-m2.nix;
+          }
+        ];
+      };
     };
-  };
 }

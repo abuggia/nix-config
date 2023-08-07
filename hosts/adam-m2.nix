@@ -1,10 +1,48 @@
+{
+  inputs,
+  pkgs,
+  ...
+}: {
+  home.stateVersion = "23.05";
+  home.homeDirectory = "/Users/adam";
 
-home-manager.useGlobalPkgs = true;
-home-manager.useUserPackages = true;
+  home.packages = [
+    # adam-neovim.packages.${pkgs.system}.default
+    #pkgs.adam-neovim
+  ];
 
-home-manager.users.adam = { pkgs, ... }: {
+  programs.bat = {
+    enable = true;
+    # config.theme = "TwoDark";
+  };
 
-  stateVersion = "23.05"; # read below
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    enableAutosuggestions = true;
+    syntaxHighlighting.enable = true;
+    shellAliases = {
+      ll = "ls --color=auto -Fla";
+      rebuild="darwin-rebuild switch --flake ~/Dropbox/projects/macos-config/flake.nix";
+      config="nvim ~/Dropbox/projects/macos-config";
+    };
+  };
+  
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.alacritty = {
+    enable = true;
+  };
+
+  programs.git.enable = true;
 
   programs.tmux = { # my tmux configuration, for example
     enable = true;
@@ -20,4 +58,5 @@ home-manager.users.adam = { pkgs, ... }: {
       bind-key -n C-a send-prefix
     '';
   };
-};
+
+}
