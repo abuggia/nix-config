@@ -7,14 +7,11 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    adam-neovim.url = "github:abuggia/neovim-flake";
+    adam-neovim.url = "github:abuggia/neovim-flake/a22a30a0cd7b25e9973f98369ad09cc1bd1f44e3";
     adam-neovim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ nixpkgs, home-manager, nix-darwin, adam-neovim, ... }:
-    let
-      pkgs = import nixpkgs { overlays = [ adam-neovim.overlay ]; };
-    in
     {
       darwinConfigurations.adam-m2 = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
@@ -39,15 +36,16 @@
           })
 
           home-manager.darwinModules.home-manager {
-            # home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            nixpkgs = pkgs;
 
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit adam-neovim; };
 
-            # Fixes error about home dir being /var/empty
-            # See https://github.com/nix-community/home-manager/issues/4026
-            users.users.adam.home = "/Users/adam"; 
-            home-manager.users.adam = import ./hosts/adam-m2.nix;
+              # users.users.adam.home = "/Users/adam"; # https://github.com/nix-community/home-manager/issues/4026
+              users.adam = import ./hosts/adam-m2.nix;
+            };
+
           }
         ];
       };
