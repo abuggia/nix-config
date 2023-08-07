@@ -36,14 +36,15 @@
           })
 
           home-manager.darwinModules.home-manager {
+            # fix for: https://github.com/nix-community/home-manager/issues/4026
+            users.users.adam.home = "/Users/adam"; 
 
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit adam-neovim; };
 
-              # users.users.adam.home = "/Users/adam"; # https://github.com/nix-community/home-manager/issues/4026
-              users.adam = import ./hosts/adam-m2.nix;
+              users.adam = import ./hosts/adam-m2-mbp/configuration.nix;
             };
 
           }

@@ -1,14 +1,14 @@
 {
   inputs,
   pkgs,
+  adam-neovim,
   ...
 }: {
   home.stateVersion = "23.05";
   home.homeDirectory = "/Users/adam";
 
   home.packages = [
-    # adam-neovim.packages.${pkgs.system}.default
-    #pkgs.adam-neovim
+    adam-neovim.packages.${pkgs.system}.nvim
   ];
 
   programs.bat = {
@@ -44,10 +44,9 @@
 
   programs.git.enable = true;
 
-  programs.tmux = { # my tmux configuration, for example
+  programs.tmux = {
     enable = true;
     keyMode = "vi";
-    clock24 = true;
     historyLimit = 10000;
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
