@@ -27,12 +27,8 @@
     enableCompletion = true;
     enableAutosuggestions = true;
     syntaxHighlighting.enable = true;
-    shellAliases = {
-      ll = "ls --color=auto -Fla";
-      rebuild="darwin-rebuild switch --flake ~/Dropbox/projects/macos-config/flake.nix";
-      config="nvim ~/Dropbox/projects/macos-config";
-      brain="nvim ~/Dropbox/brain";
-    };
+    initExtra = pkgs.lib.readFile ./.zshrc;
+    # shellAliases = {};
   };
   
   programs.starship = {
@@ -48,14 +44,7 @@
     enable = true;
     keyMode = "vi";
     historyLimit = 10000;
-    plugins = with pkgs.tmuxPlugins; [
-      vim-tmux-navigator
-      gruvbox
-    ];
-    extraConfig = ''
-      new-session -s main
-      bind-key -n C-a send-prefix
-    '';
+    extraConfig = pkgs.lib.readFile ./tmux.conf;
   };
 
 }
