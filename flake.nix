@@ -12,43 +12,26 @@
   };
 
   outputs = inputs@{ nixpkgs, home-manager, nix-darwin, adam-neovim, ... }:
-    {
-      darwinConfigurations.adam-m2 = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
+  {
+    darwinConfigurations.adam-m2 = nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      modules = [
+        ./modules/darwin
 
-          ({ pkgs, ... }: {
+        home-manager.darwinModules.home-manager {
+          # fix for: https://github.com/nix-community/home-manager/issues/4026
+          users.users.adam.home = "/Users/adam"; 
 
-            # Auto upgrade nix package and the daemon service.
-            services.nix-daemon.enable = true;
-            nix.settings.experimental-features = "nix-command flakes";
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = { inherit adam-neovim; };
 
-            # Create /etc/zshrc that loads the nix-darwin environment.
-            programs.zsh.enable = true;
-            environment.shells = [ pkgs.bashInteractive pkgs.zsh ];
-            environment.loginShell = pkgs.zsh;
-
-            #?? Set Git commit hash for darwin-version.
-            #system.configurationRevision = self.rev or self.dirtyRev or null;
-            # Used for backwards compatibility, please read the changelog before changing.
-            # $ darwin-rebuild changelog
-            system.stateVersion = 4;
-          })
-
-          home-manager.darwinModules.home-manager {
-            # fix for: https://github.com/nix-community/home-manager/issues/4026
-            users.users.adam.home = "/Users/adam"; 
-
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { inherit adam-neovim; };
-
-              users.adam = import ./hosts/adam-m2-mbp/configuration.nix;
-            };
-
-          }
-        ];
-      };
+            users.adam = import ./users/adam/home.nix;
+          };
+        }
+      ];
     };
+  };
 }
+
