@@ -28,15 +28,12 @@
     enableAutosuggestions = true;
     syntaxHighlighting.enable = true;
     initExtra = pkgs.lib.readFile ./.zshrc;
-    # shellAliases = {};
   };
   
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
   };
-
-  # programs.alacritty = { enable = true; };
 
   programs.git.enable = true;
 
