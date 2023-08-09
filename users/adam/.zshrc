@@ -11,4 +11,21 @@ alias rebuild="darwin-rebuild switch --flake ~/Dropbox/projects/macos-config/fla
 alias config="cd ~/Dropbox/projects/macos-config; vim ."
 
 # alias len="pbpaste | python -c 'import sys; print(len(sys.stdin.read().strip()))'"
-# alias prev="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+
+brain () {
+
+  if tmux has -t brain  2> /dev/null; then
+    tmux attach -t brain
+
+  else
+    pushd &&
+      cd "/Users/adam/Dropbox/brain" &&
+      tmux \
+        new -d -s brain "vim ./now.md" \; \
+        splitw -h 'vim .' \; &&
+      popd
+
+    tmux attach -t brain
+      
+  fi
+}
