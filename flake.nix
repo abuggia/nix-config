@@ -7,15 +7,19 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database.url = "github:Mic92/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     adam-neovim.url = "github:abuggia/neovim-flake/a22a30a0cd7b25e9973f98369ad09cc1bd1f44e3";
     adam-neovim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nix-darwin, adam-neovim, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, nix-darwin, adam-neovim, nix-index-database, ... }:
   {
     darwinConfigurations.adam-m2 = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
+        nix-index-database.hmModules.nix-index
+
         ./modules/darwin
 
         home-manager.darwinModules.home-manager {
