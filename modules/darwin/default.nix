@@ -7,6 +7,9 @@
     shells = [ pkgs.bashInteractive pkgs.zsh ];
     loginShell = pkgs.zsh;
     systemPath = [ "/opt/homebrew/bin" ];
+    systemPackages = with pkgs; [
+      comma
+    ];
   };
 
   system.keyboard = {
