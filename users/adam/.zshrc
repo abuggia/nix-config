@@ -8,24 +8,44 @@ alias gitlog="git log --graph --all --pretty='format:%C(auto)%h %C(cyan)%ar %C(a
 alias tl="tmux list-sessions"
 alias ta="tmux attach -t "
 alias rebuild="darwin-rebuild switch --flake ~/Dropbox/projects/macos-config/flake.nix"
-alias config="cd ~/Dropbox/projects/macos-config; vim ."
-
 # alias len="pbpaste | python -c 'import sys; print(len(sys.stdin.read().strip()))'"
+
+att () {
+  tmux attach -t "$1" # 2> /dev/null;
+}
 
 brain () {
 
-  if tmux has -t brain  2> /dev/null; then
-    tmux attach -t brain
+  if ! att brain; then
+    pushd && cd "/Users/adam/Dropbox/brain"
 
-  else
-    pushd &&
-      cd "/Users/adam/Dropbox/brain" &&
-      tmux \
-        new -d -s brain "vim ./now.md" \; \
-        splitw -h 'vim .' \; &&
-      popd
+    tmux \
+      new -d -s brain "vim ./now.md" \; \
+      splitw -h 'vim .'
 
-    tmux attach -t brain
-      
+    popd 
+    att brain
   fi
 }
+
+# TODO: templatize this
+# but also it should work
+blog () {
+
+  if ! att blog; then
+    pushd && cd "/Users/adam/Dropbox/projects/blog"
+
+    echo " ok then "
+
+    tmux \
+      new -d -s blog "nvim ." \; \
+      splitw -h "bat flake.nix" \; # put watch command in the project and call from here
+
+    popd 
+
+
+    echo " hopoe that worked "
+    att blog
+  fi
+}
+
