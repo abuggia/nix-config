@@ -31,7 +31,12 @@
     masApps = {
       Kindle = 405399194;
     };
-    casks = [ ];
+    casks = [
+      {
+        name = "docker";
+        greedy = true;
+      }
+    ];
     taps = [ ];
     brews = [ ];
   };
