@@ -8,17 +8,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1691419984,
-        "narHash": "sha256-KWAgnp/dx9G67phxIbjLaKm8W7GTTz9Ln4d7HM7aKZ4=",
+        "lastModified": 1691799804,
+        "narHash": "sha256-ofIKngpOlcJfFTWSZwZ+rZrGFQrZDMcEiMlVTZlS+cs=",
         "owner": "abuggia",
         "repo": "neovim-flake",
-        "rev": "a22a30a0cd7b25e9973f98369ad09cc1bd1f44e3",
+        "rev": "897680f96e401ca275ff27d37bc86fd4521b2df7",
         "type": "github"
       },
       "original": {
         "owner": "abuggia",
         "repo": "neovim-flake",
-        "rev": "a22a30a0cd7b25e9973f98369ad09cc1bd1f44e3",
         "type": "github"
       }
     },

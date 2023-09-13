@@ -9,7 +9,7 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    adam-neovim.url = "github:abuggia/neovim-flake/a22a30a0cd7b25e9973f98369ad09cc1bd1f44e3";
+    adam-neovim.url = "github:abuggia/neovim-flake/";
     adam-neovim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
