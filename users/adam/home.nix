@@ -8,8 +8,10 @@
   home.stateVersion = "23.05";
   home.homeDirectory = "/Users/adam";
 
-  home.packages = [
+  home.packages = with pkgs; [
     adam-neovim.packages.${pkgs.system}.nvim
+    tree
+    jq
   ];
 
   programs.bat = {
@@ -35,7 +37,18 @@
     enableZshIntegration = true;
   };
 
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "Adam Buggia";
+    userEmail = "abuggia@gmail.com";
+
+    extraConfig = {
+      color.ui = true;
+      github.user = "abuggia";
+      push.default = "tracking";
+      init.defaultBranch = "main";
+    };
+  }
 
   programs.tmux = {
     enable = true;
@@ -44,12 +57,12 @@
     extraConfig = pkgs.lib.readFile ./tmux.conf;
   };
 
+  programs.alacritty.enable = true;
+
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
   };
-
-  programs.nix-index.enable = true;
 
 }
