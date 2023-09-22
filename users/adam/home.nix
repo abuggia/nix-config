@@ -41,6 +41,7 @@
     enable = true;
     userName = "Adam Buggia";
     userEmail = "abuggia@gmail.com";
+    lfs.enable = true;
 
     extraConfig = {
       color.ui = true;
