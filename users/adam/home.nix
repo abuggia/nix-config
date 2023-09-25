@@ -12,6 +12,7 @@
     adam-neovim.packages.${pkgs.system}.nvim
     tree
     jq
+    ripgrep
   ];
 
   programs.bat = {
@@ -49,7 +50,7 @@
       push.default = "tracking";
       init.defaultBranch = "main";
     };
-  }
+  };
 
   programs.tmux = {
     enable = true;

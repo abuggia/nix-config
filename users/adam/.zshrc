@@ -9,6 +9,11 @@ alias tl="tmux list-sessions"
 alias ta="tmux attach -t "
 alias rebuild="darwin-rebuild switch --flake ~/Dropbox/projects/macos-config/flake.nix"
 # alias len="pbpaste | python -c 'import sys; print(len(sys.stdin.read().strip()))'"
+#
+
+tn () {
+  tmux new -s $(basename $(pwd))
+}
 
 att () {
   tmux attach -t "$1" # 2> /dev/null;
