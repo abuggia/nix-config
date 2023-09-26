@@ -13,6 +13,7 @@
     tree
     jq
     ripgrep
+    fd
   ];
 
   programs.bat = {
