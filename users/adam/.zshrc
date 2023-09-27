@@ -29,3 +29,10 @@ config () {
     tn && popd
   fi
 }
+
+nf () {
+  if ! att neovim-flake; then
+    pushd && cd "/Users/adam/Dropbox/projects/neovim-flake"
+    tn && popd
+  fi
+}
