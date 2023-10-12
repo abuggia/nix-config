@@ -2,6 +2,15 @@
   services.nix-daemon.enable = true;
   nix.settings.experimental-features = "nix-command flakes";
   programs.zsh.enable = true;
+  system.stateVersion = 4;
+
+  system = {
+    keyboard = {
+      enableKeyMapping = true;
+      remapCapsLockToControl = true;
+    };
+    defaults.NSGlobalDomain.AppleShowAllFiles = true;
+  };
 
   environment = {
     shells = [ pkgs.bashInteractive pkgs.zsh ];
@@ -11,13 +20,6 @@
       comma
     ];
   };
-
-  system.keyboard = {
-    enableKeyMapping = true;
-    remapCapsLockToControl = true;
-  };
-
-  system.stateVersion = 4;
 
   fonts.fontDir.enable = true;
   fonts.fonts = [ (pkgs.nerdfonts.override {
@@ -29,7 +31,7 @@
     caskArgs.no_quarantine = true;
     global.brewfile = true;
     masApps = {
-      Kindle = 405399194;
+      Kindle = 302584613;
     };
     casks = [
       {

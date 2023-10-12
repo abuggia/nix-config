@@ -7,6 +7,7 @@ alias gitlog="git log --graph --all --pretty='format:%C(auto)%h %C(cyan)%ar %C(a
 alias tl="tmux list-sessions"
 alias ta="tmux attach -t "
 alias rebuild="darwin-rebuild switch --flake ~/Dropbox/projects/config/flake.nix"
+alias s="nix develop"
 
 tn () {
   tmux new -s $(basename $(pwd)) "vim . && zsh" \; splitw -h "zsh"
