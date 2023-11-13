@@ -14,6 +14,7 @@
     jq
     ripgrep
     fd
+    watch
   ];
 
   programs.bat = {
