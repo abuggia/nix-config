@@ -21,10 +21,10 @@
     ];
   };
 
-  fonts.fontDir.enable = true;
-  fonts.fonts = [ (pkgs.nerdfonts.override {
-    fonts = [ "Meslo" ];
-  }) ];
+  #fonts.fontDir.enable = true;
+  #fonts.fonts = [ (pkgs.nerdfonts.override {
+  #  fonts = [ "Meslo" ];
+  #}) ];
 
   homebrew = {
     enable = true;
@@ -38,6 +38,8 @@
         name = "docker";
         greedy = true;
       }
+      "raycast"
+      "obsidian"
     ];
     taps = [ ];
     brews = [ ];

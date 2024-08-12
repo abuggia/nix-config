@@ -15,6 +15,7 @@
     ripgrep
     fd
     watch
+    nurl
   ];
 
   programs.bat = {

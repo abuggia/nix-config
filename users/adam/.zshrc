@@ -8,6 +8,7 @@ alias tl="tmux list-sessions"
 alias ta="tmux attach -t "
 alias rebuild="darwin-rebuild switch --flake ~/Dropbox/projects/config/flake.nix"
 alias s="nix develop"
+alias pythoni="nix-shell -p python312 --run 'python -i'"
 
 tn () {
   tmux new -s $(basename $(pwd)) "vim . && zsh" \; splitw -h "zsh"
