@@ -37,6 +37,8 @@
         name = "docker";
         greedy = true;
       }
+      "raycast"
+      "obsidian"
     ];
     taps = [ ];
     brews = [ ];
