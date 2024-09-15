@@ -21,8 +21,7 @@
     ];
   };
 
-  fonts.fontDir.enable = true;
-  fonts.fonts = [ (pkgs.nerdfonts.override {
+  fonts.packages = [ (pkgs.nerdfonts.override {
     fonts = [ "Meslo" ];
   }) ];
 
