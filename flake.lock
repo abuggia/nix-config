@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1723425045,
-        "narHash": "sha256-j9WxY3R+sGnEFOr1QechDeFJS94rNDcDDunKTRorCTg=",
+        "lastModified": 1762866146,
+        "narHash": "sha256-TF81GoVXuzS1L+t3qJQenRcyzr5wNLzigm372qa0E8k=",
         "owner": "abuggia",
         "repo": "neovim-flake",
-        "rev": "2c8d9ea9fea22ca0bffe945a425ca42c3f1bf2fe",
+        "rev": "02e3e395db846aa712c7f2032b7a7329185de88f",
         "type": "github"
       },
       "original": {
