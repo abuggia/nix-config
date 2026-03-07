@@ -1,5 +1,15 @@
 { pkgs, ... }: {
-  services.nix-daemon.enable = true;
+  nixpkgs.overlays = [
+    (final: prev: {
+      vimPlugins = prev.vimPlugins // {
+        rust-tools-nvim =
+          if builtins.hasAttr "rust-tools" prev.vimPlugins
+          then prev.vimPlugins.rust-tools
+          else prev.runCommand "empty-vim-plugin-rust-tools-nvim" { } "mkdir -p $out";
+      };
+    })
+  ];
+
   nix.settings.experimental-features = "nix-command flakes";
   programs.zsh.enable = true;
   system.stateVersion = 4;
@@ -9,12 +19,11 @@
       enableKeyMapping = true;
       remapCapsLockToControl = true;
     };
-    defaults.NSGlobalDomain.AppleShowAllFiles = true;
+    # defaults.NSGlobalDomain.AppleShowAllFiles = true;
   };
 
   environment = {
     shells = [ pkgs.bashInteractive pkgs.zsh ];
-    loginShell = pkgs.zsh;
     systemPath = [ "/opt/homebrew/bin" ];
     systemPackages = with pkgs; [
       comma
@@ -26,7 +35,7 @@
   }) ];
 
   homebrew = {
-    enable = true;
+    # enable = true;
     caskArgs.no_quarantine = true;
     global.brewfile = true;
     masApps = {
