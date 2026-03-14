@@ -1,14 +1,4 @@
 { pkgs, ... }: {
-  nixpkgs.overlays = [
-    (final: prev: {
-      vimPlugins = prev.vimPlugins // {
-        rust-tools-nvim =
-          if builtins.hasAttr "rust-tools" prev.vimPlugins
-          then prev.vimPlugins.rust-tools
-          else prev.runCommand "empty-vim-plugin-rust-tools-nvim" { } "mkdir -p $out";
-      };
-    })
-  ];
 
   nix.settings.experimental-features = "nix-command flakes";
   programs.zsh.enable = true;
@@ -30,9 +20,9 @@
     ];
   };
 
-  fonts.packages = [ (pkgs.nerdfonts.override {
-    fonts = [ "Meslo" ];
-  }) ];
+  fonts.packages = [
+    pkgs.nerd-fonts.meslo-lg
+  ];
 
   homebrew = {
     # enable = true;

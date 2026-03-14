@@ -33,7 +33,7 @@
     enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
-    initExtra = pkgs.lib.readFile ./.zshrc;
+    initContent = pkgs.lib.readFile ./.zshrc;
     autosuggestion.enable = true;
   };
 
