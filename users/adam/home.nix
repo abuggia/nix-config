@@ -17,6 +17,7 @@ in {
     agent-waiting-notify
     tree
     jq
+    gh
     ripgrep
     fd
     watch
