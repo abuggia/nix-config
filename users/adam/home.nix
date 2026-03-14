@@ -58,12 +58,13 @@ in {
         email = "abuggia@gmail.com";
       };
 
-      extraConfig = {
-        color.ui = true;
-        github.user = "abuggia";
-        push.default = "tracking";
-        init.defaultBranch = "main";
+      color.ui = true;
+      github.user = "abuggia";
+      push = {
+        autoSetupRemote = true;
+        default = "simple";
       };
+      init.defaultBranch = "main";
     };
   };
 
