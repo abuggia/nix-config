@@ -6,9 +6,9 @@ alias pw="openssl rand -base64 12"
 alias gitlog="git log --graph --all --pretty='format:%C(auto)%h %C(cyan)%ar %C(auto)%d %C(magenta)%an %C(auto)%s'"
 alias tl="tmux list-sessions"
 alias ta="tmux attach -t "
-alias rebuild="darwin-rebuild switch --flake ~/Dropbox/projects/config"
-alias s="nix develop"
+alias nd="nix develop"
 alias pythoni="nix-shell -p python312 --run 'python -i'"
+alias rebuild="sudo darwin-rebuild switch --flake ."
 
 tn () {
   tmux new -s $(basename $(pwd)) "vim . && zsh" \; splitw -h "zsh"

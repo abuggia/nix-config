@@ -1,17 +1,23 @@
 {
-  inputs,
   pkgs,
   adam-neovim,
+  codex-cli-nix,
   ...
-}: {
+}:
+let
+  agent-waiting-notify = import ./agent-waiting-notify.nix { inherit pkgs; };
+in {
 
   home.stateVersion = "23.05";
   home.homeDirectory = "/Users/adam";
 
   home.packages = with pkgs; [
     adam-neovim.packages.${pkgs.stdenv.hostPlatform.system}.nvim
+    codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
+    agent-waiting-notify
     tree
     jq
+    gh
     ripgrep
     fd
     watch
