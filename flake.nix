@@ -11,9 +11,10 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     adam-neovim.url = "github:abuggia/neovim-flake/";
     adam-neovim.inputs.nixpkgs.follows = "nixpkgs";
+    codex-cli-nix.url = "github:sadjow/codex-cli-nix";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nix-darwin, adam-neovim, nix-index-database, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, nix-darwin, adam-neovim, codex-cli-nix, nix-index-database, ... }:
   let 
     system = "aarch64-darwin";
     pkgs = nixpkgs.legacyPackages.${system};
@@ -30,7 +31,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = { inherit adam-neovim; };
+            extraSpecialArgs = { inherit adam-neovim codex-cli-nix; };
             users.adam = import ./users/adam/home.nix;
           };
         }
@@ -39,13 +40,6 @@
         # nix-index-database.hmModules.nix-index
       ];
 
-    };
-
-    devShells.${system}.default = pkgs.mkShell {
-      packages = [ pkgs.codex ];
-      shellHook = ''
-        echo "Environment Loaded!"
-      '';
     };
   };
 }
