@@ -14,9 +14,12 @@
   };
 
   outputs = inputs@{ nixpkgs, home-manager, nix-darwin, adam-neovim, nix-index-database, ... }:
-  {
+  let 
+    system = "aarch64-darwin";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
     darwinConfigurations.adam-m2 = nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
+      system = system;
       modules = [
         ./modules/darwin
 
@@ -28,7 +31,6 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             extraSpecialArgs = { inherit adam-neovim; };
-
             users.adam = import ./users/adam/home.nix;
           };
         }
@@ -36,7 +38,14 @@
         # TODO: need this for comma
         # nix-index-database.hmModules.nix-index
       ];
+
+    };
+
+    devShells.${system}.default = pkgs.mkShell {
+      packages = [ pkgs.codex ];
+      shellHook = ''
+        echo "Environment Loaded!"
+      '';
     };
   };
 }
-

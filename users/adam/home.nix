@@ -9,13 +9,14 @@
   home.homeDirectory = "/Users/adam";
 
   home.packages = with pkgs; [
-    adam-neovim.packages.${pkgs.system}.nvim
+    adam-neovim.packages.${pkgs.stdenv.hostPlatform.system}.nvim
     tree
     jq
     ripgrep
     fd
     watch
     nurl
+    treemd
   ];
 
   programs.bat = {
@@ -31,11 +32,11 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
     syntaxHighlighting.enable = true;
-    initExtra = pkgs.lib.readFile ./.zshrc;
+    initContent = pkgs.lib.readFile ./.zshrc;
+    autosuggestion.enable = true;
   };
-  
+
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
@@ -43,15 +44,20 @@
 
   programs.git = {
     enable = true;
-    userName = "Adam Buggia";
-    userEmail = "abuggia@gmail.com";
     lfs.enable = true;
 
-    extraConfig = {
-      color.ui = true;
-      github.user = "abuggia";
-      push.default = "tracking";
-      init.defaultBranch = "main";
+    settings = {
+      user = {
+        name = "Adam Buggia";
+        email = "abuggia@gmail.com";
+      };
+
+      extraConfig = {
+        color.ui = true;
+        github.user = "abuggia";
+        push.default = "tracking";
+        init.defaultBranch = "main";
+      };
     };
   };
 

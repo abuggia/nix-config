@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  services.nix-daemon.enable = true;
+
   nix.settings.experimental-features = "nix-command flakes";
   programs.zsh.enable = true;
   system.stateVersion = 4;
@@ -9,25 +9,23 @@
       enableKeyMapping = true;
       remapCapsLockToControl = true;
     };
-    defaults.NSGlobalDomain.AppleShowAllFiles = true;
+    # defaults.NSGlobalDomain.AppleShowAllFiles = true;
   };
 
   environment = {
     shells = [ pkgs.bashInteractive pkgs.zsh ];
-    loginShell = pkgs.zsh;
     systemPath = [ "/opt/homebrew/bin" ];
     systemPackages = with pkgs; [
       comma
     ];
   };
 
-  #fonts.fontDir.enable = true;
-  #fonts.fonts = [ (pkgs.nerdfonts.override {
-  #  fonts = [ "Meslo" ];
-  #}) ];
+  fonts.packages = [
+    pkgs.nerd-fonts.meslo-lg
+  ];
 
   homebrew = {
-    enable = true;
+    # enable = true;
     caskArgs.no_quarantine = true;
     global.brewfile = true;
     masApps = {
