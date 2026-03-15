@@ -52,6 +52,9 @@ in {
   programs.git = {
     enable = true;
     lfs.enable = true;
+    aliases = {
+      main = "!git checkout main && git pull origin main";
+    };
 
     settings = {
       user = {
