@@ -54,6 +54,10 @@ in {
     lfs.enable = true;
 
     settings = {
+      alias = {
+        main = "!git checkout main && git pull origin main";
+      };
+
       user = {
         name = "Adam Buggia";
         email = "abuggia@gmail.com";
