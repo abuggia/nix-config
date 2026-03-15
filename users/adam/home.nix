@@ -52,11 +52,12 @@ in {
   programs.git = {
     enable = true;
     lfs.enable = true;
-    aliases = {
-      main = "!git checkout main && git pull origin main";
-    };
 
     settings = {
+      alias = {
+        main = "!git checkout main && git pull origin main";
+      };
+
       user = {
         name = "Adam Buggia";
         email = "abuggia@gmail.com";
