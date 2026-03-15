@@ -19,6 +19,7 @@ in {
     tree
     jq
     gh
+    jujutsu
     ripgrep
     fd
     watch
