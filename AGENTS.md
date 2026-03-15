@@ -27,4 +27,4 @@
 - Commit messages are short, lowercase phrases (examples: "update neovim", "flake updates", "clean up").
 - Keep commits focused on a single change area when possible.
 - PRs should include a brief summary, the commands run (e.g., `darwin-rebuild switch --flake .#adam-m2`), and any expected behavioral changes.
-- Include screenshots only when changing visual tooling (e.g., iTerm profile updates).
+
