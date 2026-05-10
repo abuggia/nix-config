@@ -38,6 +38,7 @@
       }
       "raycast"
       "obsidian"
+      "zed"
     ];
     taps = [ ];
     brews = [ ];
