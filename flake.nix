@@ -12,6 +12,7 @@
     adam-neovim.url = "github:abuggia/neovim-flake/";
     adam-neovim.inputs.nixpkgs.follows = "nixpkgs";
     codex-cli-nix.url = "github:sadjow/codex-cli-nix";
+    claude-code.url = "github:sadjow/claude-code-nix";
   };
 
   outputs = inputs@{ nixpkgs, home-manager, nix-darwin, adam-neovim, codex-cli-nix, nix-index-database, ... }:

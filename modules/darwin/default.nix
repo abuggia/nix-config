@@ -1,10 +1,20 @@
 { pkgs, ... }: {
 
   nix.settings.experimental-features = "nix-command flakes";
+
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = (_: true); # Ensures it properly cascades
+    };
+  };
+
   programs.zsh.enable = true;
   system.stateVersion = 4;
 
   system = {
+    primaryUser = "adam";
+
     keyboard = {
       enableKeyMapping = true;
       remapCapsLockToControl = true;
@@ -15,9 +25,6 @@
   environment = {
     shells = [ pkgs.bashInteractive pkgs.zsh ];
     systemPath = [ "/opt/homebrew/bin" ];
-    systemPackages = with pkgs; [
-      comma
-    ];
   };
 
   fonts.packages = [
