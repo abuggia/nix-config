@@ -1,6 +1,7 @@
 alias ll="ls --color=auto -Fla"
 alias lh="ls -ld .*"
 alias ga="git commit -am"
+alias gm="git checkout main && git pull origin main"
 alias path="tr ':' '\n' <<< \"$PATH\""
 alias pw="openssl rand -base64 12"
 alias gitlog="git log --graph --all --pretty='format:%C(auto)%h %C(cyan)%ar %C(auto)%d %C(magenta)%an %C(auto)%s'"

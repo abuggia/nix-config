@@ -56,10 +56,6 @@ in {
     lfs.enable = true;
 
     settings = {
-      alias = {
-        main = "!git checkout main && git pull origin main";
-      };
-
       user = {
         name = "Adam Buggia";
         email = "abuggia@gmail.com";
@@ -71,7 +67,13 @@ in {
         autoSetupRemote = true;
         default = "simple";
       };
+      pull.autoSetupRemote = true;
       init.defaultBranch = "main";
+      extraConfig = {
+        "remote \"origin\"" = {
+          fetch = "+refs/heads/*:refs/remotes/origin/*";
+        };
+      };
     };
   };
 

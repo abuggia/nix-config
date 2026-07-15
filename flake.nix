@@ -36,11 +36,7 @@
             users.adam = import ./users/adam/home.nix;
           };
         }
-
-        # TODO: need this for comma
-        # nix-index-database.hmModules.nix-index
       ];
-
     };
   };
 }
