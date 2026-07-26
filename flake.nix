@@ -15,7 +15,7 @@
     claude-code.url = "github:sadjow/claude-code-nix";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nix-darwin, adam-neovim, codex-cli-nix, nix-index-database, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, nix-darwin, adam-neovim, codex-cli-nix, claude-code, nix-index-database, ... }:
   let 
     system = "aarch64-darwin";
     pkgs = nixpkgs.legacyPackages.${system};
@@ -32,7 +32,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = { inherit adam-neovim codex-cli-nix; };
+            extraSpecialArgs = { inherit adam-neovim codex-cli-nix claude-code; };
             users.adam = import ./users/adam/home.nix;
           };
         }

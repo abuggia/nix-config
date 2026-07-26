@@ -2,6 +2,7 @@
   pkgs,
   adam-neovim,
   codex-cli-nix,
+  claude-code,
   ...
 }:
 let
@@ -14,7 +15,7 @@ in {
   home.packages = with pkgs; [
     adam-neovim.packages.${pkgs.stdenv.hostPlatform.system}.nvim
     codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
-    claude-code
+    claude-code.packages.${pkgs.stdenv.hostPlatform.system}.default
     gws
     agent-waiting-notify
     tree
