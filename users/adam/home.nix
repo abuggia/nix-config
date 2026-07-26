@@ -23,6 +23,7 @@ in {
     jujutsu
     ripgrep
     fd
+    awscli2
     watch
     nurl
     treemd
