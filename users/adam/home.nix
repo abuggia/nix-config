@@ -7,6 +7,7 @@
 }:
 let
   agent-waiting-notify = import ./agent-waiting-notify.nix { inherit pkgs; };
+  docseq = import ./docseq.nix { inherit pkgs; };
 in {
 
   home.stateVersion = "23.05";
@@ -18,6 +19,7 @@ in {
     claude-code.packages.${pkgs.stdenv.hostPlatform.system}.default
     gws
     agent-waiting-notify
+    docseq
     tree
     jq
     gh

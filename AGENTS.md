@@ -5,6 +5,7 @@
 - `modules/darwin/default.nix` contains the nix-darwin system module (system packages, fonts, homebrew, defaults).
 - `users/adam/home.nix` is the Home Manager config for the `adam` user.
 - User dotfiles live alongside the user config, e.g. `users/adam/.zshrc` and `users/adam/tmux.conf`.
+- Small home-grown commands are a `<name>.nix` (a `pkgs.writeShellApplication`) beside the user config, imported in `home.nix` and listed in `home.packages` — e.g. `agent-waiting-notify.nix`, and `docseq.nix` + `docseq.sh` (allocates the next ADR/plan number in a git repo under a per-repo mutex, so concurrent sessions never reuse a number). Keep any script longer than a few lines in its own `.sh` and pull it in with `builtins.readFile`, so it stays lintable and runnable outside Nix.
 - `bootstrap.sh` documents initial setup steps; `iterm-profile.json` stores terminal profile settings.
 
 ## Build, Test, and Development Commands
