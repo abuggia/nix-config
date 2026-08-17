@@ -22,7 +22,6 @@ in {
     docseq
     tree
     jq
-    gh
     jujutsu
     ripgrep
     fd
@@ -53,6 +52,19 @@ in {
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
+  };
+
+  programs.gh = {
+    enable = true;
+
+    extensions = [ pkgs.gh-stack ];
+
+    settings = {
+      git_protocol = "https";
+      aliases.co = "pr checkout";
+    };
+
+    gitCredentialHelper.enable = false;
   };
 
   programs.git = {
