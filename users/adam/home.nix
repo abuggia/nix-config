@@ -22,6 +22,8 @@ in {
     docseq
     tree
     jq
+    gh
+    gh-stack
     jujutsu
     ripgrep
     fd
@@ -54,18 +56,7 @@ in {
     enableZshIntegration = true;
   };
 
-  programs.gh = {
-    enable = true;
-
-    extensions = [ pkgs.gh-stack ];
-
-    settings = {
-      git_protocol = "https";
-      aliases.co = "pr checkout";
-    };
-
-    gitCredentialHelper.enable = false;
-  };
+  xdg.dataFile."gh/extensions/gh-stack".source = "${pkgs.gh-stack}/bin";
 
   programs.git = {
     enable = true;
